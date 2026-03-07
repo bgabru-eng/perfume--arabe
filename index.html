@@ -44,7 +44,7 @@ body {
   font-size:16px;
 }
 
-/* Shipping Info */
+/* Shipping Info Banner */
 .shipping {
   text-align:center;
   padding:15px 20px;
@@ -141,7 +141,7 @@ footer {
   <button onclick="window.location='#products'">Comprar Ahora</button>
 </section>
 
-<!-- Shipping Info -->
+<!-- Shipping Banner -->
 <section class="shipping">
   Envío a todo México: $200 MXN
 </section>
@@ -181,20 +181,20 @@ footer {
   <div class="card">
     <img src="https://i.ibb.co/fGM3jxbX/asad-AZUL.jpg" alt="Asad Azul">
     <h3>Asad Azul</h3>
-    <p>Precio: 600 MXN</p>
-    <button onclick="addToCart('Asad Azul',600)">Agregar al Carrito</button>
+    <p>Precio: 550 MXN</p>
+    <button onclick="addToCart('Asad Azul',550)">Agregar al Carrito</button>
   </div>
   <div class="card">
     <img src="https://i.ibb.co/rKRmhgwD/ASAD-NEGRO.jpg" alt="Asad Negro">
     <h3>Asad Negro</h3>
-    <p>Precio: 600 MXN</p>
-    <button onclick="addToCart('Asad Negro',600)">Agregar al Carrito</button>
+    <p>Precio: 550 MXN</p>
+    <button onclick="addToCart('Asad Negro',550)">Agregar al Carrito</button>
   </div>
   <div class="card">
     <img src="https://i.ibb.co/c0hGC5N/ASAD-CAFE.jpg" alt="Asad Cafe">
     <h3>Asad Cafe</h3>
-    <p>Precio: 600 MXN</p>
-    <button onclick="addToCart('Asad Cafe',600)">Agregar al Carrito</button>
+    <p>Precio: 550 MXN</p>
+    <button onclick="addToCart('Asad Cafe',550)">Agregar al Carrito</button>
   </div>
 </div>
 
@@ -225,10 +225,12 @@ footer {
 </footer>
 
 <script>
-// Mobile-friendly Add to Cart in Spanish + Mini Cart
+// WhatsApp Add to Cart with Shipping cost
 function addToCart(product, price){
-  let number = "524613247039"; // reemplaza con tu WhatsApp
-  let msg = `Hola! Quiero ordenar ${product} por ${price} MXN`;
+  let number = "524613247039"; // replace with your WhatsApp number
+  let shipping = 200; // fixed shipping MXN
+  let total = price + shipping;
+  let msg = `Hola! Quiero ordenar ${product} por ${price} MXN. Envío: ${shipping} MXN. Total: ${total} MXN.`;
   let url = `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
   window.location.href = url;
 
