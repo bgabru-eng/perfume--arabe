@@ -1,209 +1,322 @@
-let cart = []; // ये सारी products store करेगा
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tienda de Perfumes e Incienso Natural</title>
+
+<title>Perfumes Árabes</title>
 
 <style>
-body {
-  background:#0b0b0b;
-  color:white;
-  font-family:Arial, sans-serif;
-  margin:0;
-  padding:0;
+
+body{
+font-family:Arial;
+background:#0b0b0b;
+color:white;
+margin:0;
 }
-.hero {
-<button onclick="sendCartWhatsApp()" style="background:#25D366;color:white;padding:15px;border:none;border-radius:6px;font-weight:bold;">
-Enviar pedido por WhatsApp
-</button>
-  text-align:center;
-  padding:50px 20px;
-  background:#1c1c1c;
-  color:#d4af37;
+
+header{
+background:#111;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
-.hero h1 { font-size:48px; margin:0 0 10px 0; letter-spacing:2px; }
-.hero p { font-size:20px; margin-bottom:20px; }
-.hero button { background:#d4af37; color:black; border:none; padding:15px 25px; border-radius:5px; cursor:pointer; font-weight:bold; font-size:16px; }
-.shipping {
-  text-align:center;
-  padding:15px 20px;
-  background: linear-gradient(90deg, #d4af37, #f0c75e);
-  color:#0b0b0b;
-  font-weight:bold;
-  font-size:20px;
-  border-radius:8px;
-  margin:10px 20px;
+
+.logo{
+color:#d4af37;
+font-size:24px;
+font-weight:bold;
 }
-.products { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:25px; padding:20px; }
-.card {
-  position:relative;
-  background:#1a1a1a;
-  border:1px solid #d4af37;
-  border-radius:10px;
-  padding:15px;
-  text-align:center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+.cart{
+cursor:pointer;
+font-size:18px;
 }
-.card:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(212,175,55,0.6); }
-.card img { width:100%; height:250px; object-fit:cover; }
-button { background:#d4af37; color:black; border:none; padding:10px; border-radius:5px; cursor:pointer; font-weight:bold; }
-h2 { color:#d4af37; text-align:center; margin-top:40px; letter-spacing:2px; }
-#mini-cart { position:fixed; bottom:80px; right:20px; background:#d4af37; color:black; padding:15px 20px; border-radius:8px; display:none; font-weight:bold; box-shadow:0 5px 15px rgba(0,0,0,0.5); z-index:1000; min-width:200px; text-align:center; }
-footer { text-align:center; padding:20px; color:white; border-top:1px solid #d4af37; margin-top:30px; }
-input[type=number]{ width:50px; text-align:center; margin-bottom:10px; }
+
+.shipping{
+background:#d4af37;
+color:black;
+text-align:center;
+padding:12px;
+font-weight:bold;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.card{
+background:#1a1a1a;
+border:1px solid #d4af37;
+border-radius:10px;
+padding:15px;
+text-align:center;
+}
+
+.card img{
+width:100%;
+height:240px;
+object-fit:cover;
+}
+
+button{
+background:#d4af37;
+border:none;
+padding:10px;
+cursor:pointer;
+margin-top:5px;
+}
+
+h2{
+text-align:center;
+color:#d4af37;
+margin-top:40px;
+}
+
+.cartBox{
+position:fixed;
+right:-400px;
+top:0;
+width:350px;
+height:100%;
+background:#111;
+padding:20px;
+transition:0.4s;
+overflow:auto;
+}
+
+.cartBox.active{
+right:0;
+}
+
+.cartItem{
+border-bottom:1px solid #333;
+padding:10px 0;
+}
+
+.remove{
+color:red;
+cursor:pointer;
+}
+
+.checkout{
+background:#25D366;
+color:white;
+width:100%;
+padding:12px;
+font-size:18px;
+}
+
 </style>
 </head>
+
 <body>
 
-<section class="hero">
-  <h1>Perfumes e Incienso Natural</h1>
-  <p>Colección Original Lattafa</p>
-  <button onclick="window.location='#products'">Comprar Ahora</button>
-</section>
+<header>
 
-<section class="shipping">
-  Envío a todo México: $200 MXN
-</section>
+<div class="logo">Perfumes</div>
 
-<!-- Perfumes Collection -->
+<div class="cart" onclick="toggleCart()">
+🛒 Cart (<span id="cartCount">0</span>)
+</div>
+
+</header>
+
+<div class="shipping">
+Envío a todo México: $200 MXN
+</div>
+
 <h2>Perfumes</h2>
-<div class="products" id="products">
-  <div class="card">
-    <img src="https://i.ibb.co/j9MJYQJB/YARA-BCO.jpg" alt="Yara Blanco">
-    <h3>Yara Blanco</h3>
-    <p>Precio: 550 MXN</p>
-    <label for="qtyYaraBlanco">Piezas:</label>
-    <input type="number" id="qtyYaraBlanco" value="1" min="1">
-    <button onclick="addToCart('Yara Blanco',550,'qtyYaraBlanco')">Agregar al Carrito</button>
-  </div>
-  <div class="card">
-    <img src="https://i.ibb.co/CKk5jN9v/YARA-ROJO.jpg" alt="Yara Rojo">
-    <h3>Yara Rojo</h3>
-    <p>Precio: 550 MXN</p>
-    <label for="qtyYaraRojo">Piezas:</label>
-    <input type="number" id="qtyYaraRojo" value="1" min="1">
-    <button onclick="addToCart('Yara Rojo',550,'qtyYaraRojo')">Agregar al Carrito</button>
-  </div>
-  <div class="card">
-    <img src="https://i.ibb.co/KpQMsVHw/YARA-AMARILLO.jpg" alt="Yara Amarillo">
-    <h3>Yara Amarillo</h3>
-    <p>Precio: 550 MXN</p>
-    <label for="qtyYaraAmarillo">Piezas:</label>
-    <input type="number" id="qtyYaraAmarillo" value="1" min="1">
-    <button onclick="addToCart('Yara Amarillo',550,'qtyYaraAmarillo')">Agregar al Carrito</button>
-  </div>
-</div>
 
-<!-- Incienso Natural Collection -->
-<h2>Incienso Natural</h2>
 <div class="products">
-  <div class="card">
-    <img src="https://i.ibb.co/fGM3jxbX/asad-AZUL.jpg" alt="Asad Azul">
-    <h3>Asad Azul</h3>
-    <p>Precio: 550 MXN</p>
-    <label for="qtyAsadAzul">Piezas:</label>
-    <input type="number" id="qtyAsadAzul" value="1" min="1">
-    <button onclick="addToCart('Asad Azul',550,'qtyAsadAzul')">Agregar al Carrito</button>
-  </div>
-  <div class="card">
-    <img src="https://i.ibb.co/rKRmhgwD/ASAD-NEGRO.jpg" alt="Asad Negro">
-    <h3>Asad Negro</h3>
-    <p>Precio: 550 MXN</p>
-    <label for="qtyAsadNegro">Piezas:</label>
-    <input type="number" id="qtyAsadNegro" value="1" min="1">
-    <button onclick="addToCart('Asad Negro',550,'qtyAsadNegro')">Agregar al Carrito</button>
-  </div>
-  <div class="card">
-    <img src="https://i.ibb.co/c0hGC5N/ASAD-CAFE.jpg" alt="Asad Cafe">
-    <h3>Asad Cafe</h3>
-    <p>Precio: 550 MXN</p>
-    <label for="qtyAsadCafe">Piezas:</label>
-    <input type="number" id="qtyAsadCafe" value="1" min="1">
-    <button onclick="addToCart('Asad Cafe',550,'qtyAsadCafe')">Agregar al Carrito</button>
-  </div>
+
+<div class="card">
+
+<img src="https://i.ibb.co/j9MJYQJB/YARA-BCO.jpg">
+
+<h3>Yara Blanco</h3>
+
+<p>550 MXN</p>
+
+<input type="number" id="q1" value="1" min="1">
+
+<button onclick="addCart('Yara Blanco',550,'q1')">Agregar</button>
+
 </div>
 
-<!-- Mini Cart -->
-<div id="mini-cart">Producto agregado al carrito</div>
+<div class="card">
 
-<!-- WhatsApp Button -->
-<a href="https://wa.me/524613247039" style="position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:15px; border-radius:50%; font-size:20px; text-align:center; text-decoration:none;" target="_blank">WhatsApp</a>
+<img src="https://i.ibb.co/CKk5jN9v/YARA-ROJO.jpg">
 
-<footer>
-  <p>Tienda de Perfumes e Incienso Natural | Haz tu pedido por WhatsApp</p>
-</footer>
+<h3>Yara Rojo</h3>
+
+<p>550 MXN</p>
+
+<input type="number" id="q2" value="1" min="1">
+
+<button onclick="addCart('Yara Rojo',550,'q2')">Agregar</button>
+
+</div>
+
+<div class="card">
+
+<img src="https://i.ibb.co/KpQMsVHw/YARA-AMARILLO.jpg">
+
+<h3>Yara Amarillo</h3>
+
+<p>550 MXN</p>
+
+<input type="number" id="q3" value="1" min="1">
+
+<button onclick="addCart('Yara Amarillo',550,'q3')">Agregar</button>
+
+</div>
+
+</div>
+
+<h2>Incienso Natural</h2>
+
+<div class="products">
+
+<div class="card">
+
+<img src="https://i.ibb.co/fGM3jxbX/asad-AZUL.jpg">
+
+<h3>Asad Azul</h3>
+
+<p>550 MXN</p>
+
+<input type="number" id="q4" value="1" min="1">
+
+<button onclick="addCart('Asad Azul',600,'q4')">Agregar</button>
+
+</div>
+
+<div class="card">
+
+<img src="https://i.ibb.co/rKRmhgwD/ASAD-NEGRO.jpg">
+
+<h3>Asad Negro</h3>
+
+<p>550 MXN</p>
+
+<input type="number" id="q5" value="1" min="1">
+
+<button onclick="addCart('Asad Negro',550,'q5')">Agregar</button>
+
+</div>
+
+</div>
+
+<div class="cartBox" id="cartBox">
+
+<h2>Carrito</h2>
+
+<div id="cartItems"></div>
+
+<br>
+
+<button class="checkout" onclick="sendOrder()">Enviar Pedido WhatsApp</button>
+
+</div>
 
 <script>
 
-let cart = []; // cart array
+let cart=[];
 
-function addToCart(product, price, qtyId){
+function toggleCart(){
 
-  let quantity = parseInt(document.getElementById(qtyId).value) || 1;
-
-  let existing = cart.find(item => item.name === product);
-
-  if(existing){
-    existing.quantity += quantity;
-  } 
-  else{
-    cart.push({
-      name: product,
-      price: price,
-      quantity: quantity
-    });
-  }
-
-  const miniCart = document.getElementById('mini-cart');
-
-  miniCart.innerText = cart.length + " productos en el carrito";
-
-  miniCart.style.display = 'block';
-
-  setTimeout(()=>{
-    miniCart.style.display = 'none';
-  },2000);
+document.getElementById("cartBox").classList.toggle("active")
 
 }
 
-function sendCartWhatsApp(){
+function addCart(name,price,id){
 
-  if(cart.length === 0){
-    alert("Carrito vacío");
-    return;
-  }
+let qty=parseInt(document.getElementById(id).value)
 
-  let number = "524613247039"; // अपना whatsapp number
+cart.push({name,price,qty})
 
-  let shipping = 200;
+updateCart()
 
-  let subtotal = 0;
+}
 
-  let message = "Hola! Quiero ordenar:\n";
+function updateCart(){
 
-  cart.forEach(item=>{
+let box=document.getElementById("cartItems")
 
-    subtotal += item.price * item.quantity;
+box.innerHTML=""
 
-    message += item.quantity + " x " + item.name + " - " + (item.price * item.quantity) + " MXN\n";
+let count=0
 
-  });
+cart.forEach((item,i)=>{
 
-  let total = subtotal + shipping;
+count++
 
-  message += "\nEnvío: " + shipping + " MXN";
-  message += "\nTotal: " + total + " MXN";
+box.innerHTML+=`
+<div class="cartItem">
+${item.qty} x ${item.name} - ${item.price*item.qty} MXN
+<br>
+<span class="remove" onclick="removeItem(${i})">Eliminar</span>
+</div>
+`
 
-  let url = "https://wa.me/" + number + "?text=" + encodeURIComponent(message);
+})
 
-  window.location.href = url;
+document.getElementById("cartCount").innerText=count
 
-  cart = [];
+}
+
+function removeItem(i){
+
+cart.splice(i,1)
+
+updateCart()
+
+}
+
+function sendOrder(){
+
+if(cart.length==0){
+
+alert("Carrito vacío")
+
+return
+
+}
+
+let shipping=200
+
+let subtotal=0
+
+let msg="Hola quiero ordenar:%0A"
+
+cart.forEach(item=>{
+
+let total=item.price*item.qty
+
+subtotal+=total
+
+msg+=`${item.qty} x ${item.name} - ${total} MXN%0A`
+
+})
+
+let total=subtotal+shipping
+
+msg+=`%0AEnvío: ${shipping} MXN`
+msg+=`%0ATotal: ${total} MXN`
+
+let number="524613247039"
+
+window.open(`https://wa.me/${number}?text=${msg}`)
 
 }
 
 </script>
+
 </body>
 </html>
