@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tienda de Perfumes Árabe de Lujo</title>
+<title>Tienda de Perfumes e Incienso Natural</title>
 
 <style>
 body {
@@ -13,38 +13,15 @@ body {
   margin:0;
   padding:0;
 }
-
-/* Hero Banner */
 .hero {
   text-align:center;
   padding:50px 20px;
   background:#1c1c1c;
   color:#d4af37;
 }
-
-.hero h1 {
-  font-size:48px;
-  margin:0 0 10px 0;
-  letter-spacing:2px;
-}
-
-.hero p {
-  font-size:20px;
-  margin-bottom:20px;
-}
-
-.hero button {
-  background:#d4af37;
-  color:black;
-  border:none;
-  padding:15px 25px;
-  border-radius:5px;
-  cursor:pointer;
-  font-weight:bold;
-  font-size:16px;
-}
-
-/* Shipping Info Banner */
+.hero h1 { font-size:48px; margin:0 0 10px 0; letter-spacing:2px; }
+.hero p { font-size:20px; margin-bottom:20px; }
+.hero button { background:#d4af37; color:black; border:none; padding:15px 25px; border-radius:5px; cursor:pointer; font-weight:bold; font-size:16px; }
 .shipping {
   text-align:center;
   padding:15px 20px;
@@ -55,16 +32,7 @@ body {
   border-radius:8px;
   margin:10px 20px;
 }
-
-/* Products Grid */
-.products {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:25px;
-  padding:20px;
-}
-
-/* Card style */
+.products { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:25px; padding:20px; }
 .card {
   position:relative;
   background:#1a1a1a;
@@ -74,172 +42,111 @@ body {
   text-align:center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(212,175,55,0.6);
-}
-
-.card img {
-  width:100%;
-  height:250px;
-  object-fit:cover;
-}
-
-/* Buttons */
-button {
-  background:#d4af37;
-  color:black;
-  border:none;
-  padding:10px;
-  border-radius:5px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-/* Headings */
-h2 {
-  color:#d4af37;
-  text-align:center;
-  margin-top:40px;
-  letter-spacing:2px;
-}
-
-/* Mini Cart Popup */
-#mini-cart {
-  position:fixed;
-  bottom:80px;
-  right:20px;
-  background:#d4af37;
-  color:black;
-  padding:15px 20px;
-  border-radius:8px;
-  display:none;
-  font-weight:bold;
-  box-shadow:0 5px 15px rgba(0,0,0,0.5);
-  z-index:1000;
-  min-width:200px;
-  text-align:center;
-}
-
-/* Footer */
-footer {
-  text-align:center;
-  padding:20px;
-  color:white;
-  border-top:1px solid #d4af37;
-  margin-top:30px;
-}
+.card:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(212,175,55,0.6); }
+.card img { width:100%; height:250px; object-fit:cover; }
+button { background:#d4af37; color:black; border:none; padding:10px; border-radius:5px; cursor:pointer; font-weight:bold; }
+h2 { color:#d4af37; text-align:center; margin-top:40px; letter-spacing:2px; }
+#mini-cart { position:fixed; bottom:80px; right:20px; background:#d4af37; color:black; padding:15px 20px; border-radius:8px; display:none; font-weight:bold; box-shadow:0 5px 15px rgba(0,0,0,0.5); z-index:1000; min-width:200px; text-align:center; }
+footer { text-align:center; padding:20px; color:white; border-top:1px solid #d4af37; margin-top:30px; }
+input[type=number]{ width:50px; text-align:center; margin-bottom:10px; }
 </style>
 </head>
 <body>
 
-<!-- Hero Banner -->
 <section class="hero">
-  <h1>Perfumes Árabes de Lujo</h1>
+  <h1>Perfumes e Incienso Natural</h1>
   <p>Colección Original Lattafa</p>
   <button onclick="window.location='#products'">Comprar Ahora</button>
 </section>
 
-<!-- Shipping Banner -->
 <section class="shipping">
   Envío a todo México: $200 MXN
 </section>
 
-<!-- Dama Collection -->
-<h2>Colección Dama</h2>
+<!-- Perfumes Collection -->
+<h2>Perfumes</h2>
 <div class="products" id="products">
   <div class="card">
     <img src="https://i.ibb.co/j9MJYQJB/YARA-BCO.jpg" alt="Yara Blanco">
     <h3>Yara Blanco</h3>
     <p>Precio: 550 MXN</p>
-    <button onclick="addToCart('Yara Blanco',550)">Agregar al Carrito</button>
+    <label for="qtyYaraBlanco">Piezas:</label>
+    <input type="number" id="qtyYaraBlanco" value="1" min="1">
+    <button onclick="addToCart('Yara Blanco',550,'qtyYaraBlanco')">Agregar al Carrito</button>
   </div>
   <div class="card">
     <img src="https://i.ibb.co/CKk5jN9v/YARA-ROJO.jpg" alt="Yara Rojo">
     <h3>Yara Rojo</h3>
     <p>Precio: 550 MXN</p>
-    <button onclick="addToCart('Yara Rojo',550)">Agregar al Carrito</button>
+    <label for="qtyYaraRojo">Piezas:</label>
+    <input type="number" id="qtyYaraRojo" value="1" min="1">
+    <button onclick="addToCart('Yara Rojo',550,'qtyYaraRojo')">Agregar al Carrito</button>
   </div>
   <div class="card">
-    <img src="https://i.ibb.co/TqHpCQB0/YARA-CANDY.jpg" alt="Yara Candy">
-    <h3>Yara Candy</h3>
+    <img src="https://i.ibb.co/KpQMsVHw/YARA-AMARILLO.jpg" alt="Yara Amarillo">
+    <h3>Yara Amarillo</h3>
     <p>Precio: 550 MXN</p>
-    <button onclick="addToCart('Yara Candy',550)">Agregar al Carrito</button>
-  </div>
-  <div class="card">
-    <img src="https://i.ibb.co/qYLML1fz/YARA-MORADO.jpg" alt="Yara Morado">
-    <h3>Yara Morado</h3>
-    <p>Precio: 550 MXN</p>
-    <button onclick="addToCart('Yara Morado',550)">Agregar al Carrito</button>
+    <label for="qtyYaraAmarillo">Piezas:</label>
+    <input type="number" id="qtyYaraAmarillo" value="1" min="1">
+    <button onclick="addToCart('Yara Amarillo',550,'qtyYaraAmarillo')">Agregar al Carrito</button>
   </div>
 </div>
 
-<!-- Hombres Collection -->
-<h2>Colección Hombres</h2>
+<!-- Incienso Natural Collection -->
+<h2>Incienso Natural</h2>
 <div class="products">
   <div class="card">
     <img src="https://i.ibb.co/fGM3jxbX/asad-AZUL.jpg" alt="Asad Azul">
     <h3>Asad Azul</h3>
     <p>Precio: 550 MXN</p>
-    <button onclick="addToCart('Asad Azul',550)">Agregar al Carrito</button>
+    <label for="qtyAsadAzul">Piezas:</label>
+    <input type="number" id="qtyAsadAzul" value="1" min="1">
+    <button onclick="addToCart('Asad Azul',550,'qtyAsadAzul')">Agregar al Carrito</button>
   </div>
   <div class="card">
     <img src="https://i.ibb.co/rKRmhgwD/ASAD-NEGRO.jpg" alt="Asad Negro">
     <h3>Asad Negro</h3>
     <p>Precio: 550 MXN</p>
-    <button onclick="addToCart('Asad Negro',550)">Agregar al Carrito</button>
+    <label for="qtyAsadNegro">Piezas:</label>
+    <input type="number" id="qtyAsadNegro" value="1" min="1">
+    <button onclick="addToCart('Asad Negro',550,'qtyAsadNegro')">Agregar al Carrito</button>
   </div>
   <div class="card">
     <img src="https://i.ibb.co/c0hGC5N/ASAD-CAFE.jpg" alt="Asad Cafe">
     <h3>Asad Cafe</h3>
     <p>Precio: 550 MXN</p>
-    <button onclick="addToCart('Asad Cafe',550)">Agregar al Carrito</button>
+    <label for="qtyAsadCafe">Piezas:</label>
+    <input type="number" id="qtyAsadCafe" value="1" min="1">
+    <button onclick="addToCart('Asad Cafe',550,'qtyAsadCafe')">Agregar al Carrito</button>
   </div>
 </div>
 
-<!-- Unisex Collection -->
-<h2>Colección Unisex</h2>
-<div class="products">
-  <div class="card">
-    <img src="https://i.ibb.co/KpQMsVHw/YARA-AMARILLO.jpg" alt="Yara Amarillo">
-    <h3>Yara Amarillo</h3>
-    <p>Precio: 550 MXN</p>
-    <button onclick="addToCart('Yara Amarillo',550)">Agregar al Carrito</button>
-  </div>
-</div>
-
-<!-- Mini Cart Popup -->
+<!-- Mini Cart -->
 <div id="mini-cart">Producto agregado al carrito</div>
 
-<!-- Floating WhatsApp Button -->
-<a href="https://wa.me/524613247039" 
-   style="position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:15px; border-radius:50%; font-size:20px; text-align:center; text-decoration:none;" 
-   target="_blank">
-   WhatsApp
-</a>
+<!-- WhatsApp Button -->
+<a href="https://wa.me/524613247039" style="position:fixed; bottom:20px; right:20px; background:#25D366; color:white; padding:15px; border-radius:50%; font-size:20px; text-align:center; text-decoration:none;" target="_blank">WhatsApp</a>
 
-<!-- Footer -->
 <footer>
-  <p>Tienda de Perfumes Árabe | Haz tu pedido por WhatsApp</p>
+  <p>Tienda de Perfumes e Incienso Natural | Haz tu pedido por WhatsApp</p>
 </footer>
 
 <script>
-// WhatsApp Add to Cart with Shipping cost
-function addToCart(product, price){
-  let number = "524613247039"; // replace with your WhatsApp number
-  let shipping = 200; // fixed shipping MXN
-  let total = price + shipping;
-  let msg = `Hola! Quiero ordenar ${product} por ${price} MXN. Envío: ${shipping} MXN. Total: ${total} MXN.`;
+function addToCart(product, price, qtyId){
+  let quantity = document.getElementById(qtyId).value;
+  quantity = parseInt(quantity) || 1;
+  let shipping = 200;
+  let subtotal = price * quantity;
+  let total = subtotal + shipping;
+  let number = "524613247039"; // replace with your WhatsApp
+  let msg = `Hola! Quiero ordenar ${quantity} piezas de ${product} por ${subtotal} MXN. Envío: ${shipping} MXN. Total: ${total} MXN.`;
   let url = `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
   window.location.href = url;
 
-  // Show mini cart popup
   const miniCart = document.getElementById('mini-cart');
   miniCart.style.display = 'block';
   setTimeout(()=>{ miniCart.style.display = 'none'; }, 2000);
 }
 </script>
-
 </body>
 </html>
