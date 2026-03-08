@@ -1,42 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Perfumes Árabes</title>
+<title>Perfume Árabe Original Importación</title>
 
 <style>
 
 body{
 font-family:Arial;
-background:#0b0b0b;
-color:white;
 margin:0;
+background:#0a1f44;
+color:white;
 }
 
 header{
-background:#111;
+background:#0d2d63;
 padding:20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.logo{
-color:#d4af37;
-font-size:24px;
+text-align:center;
+font-size:26px;
 font-weight:bold;
 }
 
-.cart{
-cursor:pointer;
-font-size:18px;
-}
-
 .shipping{
-background:#d4af37;
+background:#FFD700;
 color:black;
 text-align:center;
 padding:12px;
@@ -44,94 +34,87 @@ font-weight:bold;
 }
 
 .products{
+
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:20px;
 padding:20px;
+
 }
 
 .card{
-background:#1a1a1a;
-border:1px solid #d4af37;
+
+background:#123b7a;
 border-radius:10px;
 padding:15px;
 text-align:center;
+box-shadow:0 5px 10px rgba(0,0,0,0.5);
+
 }
 
 .card img{
+
 width:100%;
 height:240px;
 object-fit:cover;
+border-radius:8px;
+
+}
+
+.price{
+
+font-size:18px;
+margin:10px 0;
+
 }
 
 button{
-background:#d4af37;
+
+background:#25D366;
 border:none;
 padding:10px;
-cursor:pointer;
-margin-top:5px;
-}
-
-h2{
-text-align:center;
-color:#d4af37;
-margin-top:40px;
-}
-
-.cartBox{
-position:fixed;
-right:-400px;
-top:0;
-width:350px;
-height:100%;
-background:#111;
-padding:20px;
-transition:0.4s;
-overflow:auto;
-}
-
-.cartBox.active{
-right:0;
-}
-
-.cartItem{
-border-bottom:1px solid #333;
-padding:10px 0;
-}
-
-.remove{
-color:red;
-cursor:pointer;
-}
-
-.checkout{
-background:#25D366;
 color:white;
-width:100%;
-padding:12px;
+cursor:pointer;
+border-radius:6px;
+
+}
+
+input{
+
+width:60px;
+margin-top:5px;
+
+}
+
+.cartBtn{
+
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+padding:16px;
+border-radius:50px;
 font-size:18px;
+
 }
 
 </style>
+
 </head>
 
 <body>
 
 <header>
 
-<div class="logo">Perfumes</div>
-
-<div class="cart" onclick="toggleCart()">
-🛒 Cart (<span id="cartCount">0</span>)
-</div>
+Perfume Árabe Original Importación
 
 </header>
 
 <div class="shipping">
-Envío a todo México: $200 MXN
-</div>
 
-<h2>Perfumes</h2>
+Envío a todo México: $200 MXN
+
+</div>
 
 <div class="products">
 
@@ -141,11 +124,13 @@ Envío a todo México: $200 MXN
 
 <h3>Yara Blanco</h3>
 
-<p>550 MXN</p>
+<div class="price">$550 MXN</div>
 
-<input type="number" id="q1" value="1" min="1">
+<input type="number" id="p1" value="1" min="1">
 
-<button onclick="addCart('Yara Blanco',550,'q1')">Agregar</button>
+<br>
+
+<button onclick="add('Yara Blanco',550,'p1')">Agregar</button>
 
 </div>
 
@@ -155,11 +140,13 @@ Envío a todo México: $200 MXN
 
 <h3>Yara Rojo</h3>
 
-<p>550 MXN</p>
+<div class="price">$550 MXN</div>
 
-<input type="number" id="q2" value="1" min="1">
+<input type="number" id="p2" value="1" min="1">
 
-<button onclick="addCart('Yara Rojo',550,'q2')">Agregar</button>
+<br>
+
+<button onclick="add('Yara Rojo',550,'p2')">Agregar</button>
 
 </div>
 
@@ -169,19 +156,47 @@ Envío a todo México: $200 MXN
 
 <h3>Yara Amarillo</h3>
 
-<p>550 MXN</p>
+<div class="price">$550 MXN</div>
 
-<input type="number" id="q3" value="1" min="1">
+<input type="number" id="p3" value="1" min="1">
 
-<button onclick="addCart('Yara Amarillo',550,'q3')">Agregar</button>
+<br>
+
+<button onclick="add('Yara Amarillo',550,'p3')">Agregar</button>
 
 </div>
 
+<div class="card">
+
+<img src="https://i.ibb.co/TqHpCQB0/YARA-CANDY.jpg">
+
+<h3>Yara Candy</h3>
+
+<div class="price">$550 MXN</div>
+
+<input type="number" id="p4" value="1" min="1">
+
+<br>
+
+<button onclick="add('Yara Candy',550,'p4')">Agregar</button>
+
 </div>
 
-<h2>Incienso Natural</h2>
+<div class="card">
 
-<div class="products">
+<img src="https://i.ibb.co/qYLML1fz/YARA-MORADO.jpg">
+
+<h3>Yara Morado</h3>
+
+<div class="price">$550 MXN</div>
+
+<input type="number" id="p5" value="1" min="1">
+
+<br>
+
+<button onclick="add('Yara Morado',550,'p5')">Agregar</button>
+
+</div>
 
 <div class="card">
 
@@ -189,11 +204,13 @@ Envío a todo México: $200 MXN
 
 <h3>Asad Azul</h3>
 
-<p>550 MXN</p>
+<div class="price">$550 MXN</div>
 
-<input type="number" id="q4" value="1" min="1">
+<input type="number" id="p6" value="1" min="1">
 
-<button onclick="addCart('Asad Azul',600,'q4')">Agregar</button>
+<br>
+
+<button onclick="add('Asad Azul',550,'p6')">Agregar</button>
 
 </div>
 
@@ -203,83 +220,55 @@ Envío a todo México: $200 MXN
 
 <h3>Asad Negro</h3>
 
-<p>550 MXN</p>
+<div class="price">$550 MXN</div>
 
-<input type="number" id="q5" value="1" min="1">
-
-<button onclick="addCart('Asad Negro',550,'q5')">Agregar</button>
-
-</div>
-
-</div>
-
-<div class="cartBox" id="cartBox">
-
-<h2>Carrito</h2>
-
-<div id="cartItems"></div>
+<input type="number" id="p7" value="1" min="1">
 
 <br>
 
-<button class="checkout" onclick="sendOrder()">Enviar Pedido WhatsApp</button>
+<button onclick="add('Asad Negro',550,'p7')">Agregar</button>
 
 </div>
 
+<div class="card">
+
+<img src="https://i.ibb.co/c0hGC5N/ASAD-CAFE.jpg">
+
+<h3>Asad Café</h3>
+
+<div class="price">$550 MXN</div>
+
+<input type="number" id="p8" value="1" min="1">
+
+<br>
+
+<button onclick="add('Asad Café',550,'p8')">Agregar</button>
+
+</div>
+
+</div>
+
+<button class="cartBtn" onclick="order()">
+
+Enviar Pedido WhatsApp
+
+</button>
+
 <script>
 
-let cart=[];
+let cart=[]
 
-function toggleCart(){
-
-document.getElementById("cartBox").classList.toggle("active")
-
-}
-
-function addCart(name,price,id){
+function add(name,price,id){
 
 let qty=parseInt(document.getElementById(id).value)
 
 cart.push({name,price,qty})
 
-updateCart()
+alert("Producto agregado")
 
 }
 
-function updateCart(){
-
-let box=document.getElementById("cartItems")
-
-box.innerHTML=""
-
-let count=0
-
-cart.forEach((item,i)=>{
-
-count++
-
-box.innerHTML+=`
-<div class="cartItem">
-${item.qty} x ${item.name} - ${item.price*item.qty} MXN
-<br>
-<span class="remove" onclick="removeItem(${i})">Eliminar</span>
-</div>
-`
-
-})
-
-document.getElementById("cartCount").innerText=count
-
-}
-
-function removeItem(i){
-
-cart.splice(i,1)
-
-updateCart()
-
-}
-
-function sendOrder(){
+function order(){
 
 if(cart.length==0){
 
@@ -295,28 +284,27 @@ let subtotal=0
 
 let msg="Hola quiero ordenar:%0A"
 
-cart.forEach(item=>{
+cart.forEach(p=>{
 
-let total=item.price*item.qty
+let total=p.price*p.qty
 
 subtotal+=total
 
-msg+=`${item.qty} x ${item.name} - ${total} MXN%0A`
+msg+=`${p.qty} x ${p.name} - ${total} MXN%0A`
 
 })
 
 let total=subtotal+shipping
 
-msg+=`%0AEnvío: ${shipping} MXN`
+msg+=`%0AEnvío: 200 MXN`
 msg+=`%0ATotal: ${total} MXN`
 
-let number="524613247039"
-
-window.open(`https://wa.me/${number}?text=${msg}`)
+window.open(`https://wa.me/524613247039?text=${msg}`)
 
 }
 
 </script>
 
 </body>
+
 </html>
