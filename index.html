@@ -1,3 +1,4 @@
+let cart = []; // ये सारी products store करेगा
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -132,21 +133,74 @@ input[type=number]{ width:50px; text-align:center; margin-bottom:10px; }
 </footer>
 
 <script>
+
+let cart = []; // cart array
+
 function addToCart(product, price, qtyId){
-  let quantity = document.getElementById(qtyId).value;
-  quantity = parseInt(quantity) || 1;
-  let shipping = 200;
-  let subtotal = price * quantity;
-  let total = subtotal + shipping;
-  let number = "524613247039"; // replace with your WhatsApp
-  let msg = `Hola! Quiero ordenar ${quantity} piezas de ${product} por ${subtotal} MXN. Envío: ${shipping} MXN. Total: ${total} MXN.`;
-  let url = `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
-  window.location.href = url;
+
+  let quantity = parseInt(document.getElementById(qtyId).value) || 1;
+
+  let existing = cart.find(item => item.name === product);
+
+  if(existing){
+    existing.quantity += quantity;
+  } 
+  else{
+    cart.push({
+      name: product,
+      price: price,
+      quantity: quantity
+    });
+  }
 
   const miniCart = document.getElementById('mini-cart');
+
+  miniCart.innerText = cart.length + " productos en el carrito";
+
   miniCart.style.display = 'block';
-  setTimeout(()=>{ miniCart.style.display = 'none'; }, 2000);
+
+  setTimeout(()=>{
+    miniCart.style.display = 'none';
+  },2000);
+
 }
+
+function sendCartWhatsApp(){
+
+  if(cart.length === 0){
+    alert("Carrito vacío");
+    return;
+  }
+
+  let number = "524613247039"; // अपना whatsapp number
+
+  let shipping = 200;
+
+  let subtotal = 0;
+
+  let message = "Hola! Quiero ordenar:\n";
+
+  cart.forEach(item=>{
+
+    subtotal += item.price * item.quantity;
+
+    message += item.quantity + " x " + item.name + " - " + (item.price * item.quantity) + " MXN\n";
+
+  });
+
+  let total = subtotal + shipping;
+
+  message += "\nEnvío: " + shipping + " MXN";
+  message += "\nTotal: " + total + " MXN";
+
+  let url = "https://wa.me/" + number + "?text=" + encodeURIComponent(message);
+
+  window.location.href = url;
+
+  cart = [];
+
+}
+
 </script>
 </body>
 </html>
